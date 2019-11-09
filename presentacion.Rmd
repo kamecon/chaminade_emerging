@@ -4,6 +4,7 @@ author: "Kamal Romero"
 date: "Marzo 2019"
 output:
   ioslides_presentation:
+    css: https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
     incremental: yes
   slidy_presentation:
     incremental: yes
@@ -54,7 +55,7 @@ Durante años las necesidades de financiación han sido cubiertas por el resto d
 ## Economías emergentes: Características
 
 
-```{r librerias, echo = FALSE}
+```{r librerias, echo = FALSE, warning=FALSE, message=FALSE}
 if (! ('pacman' %in% installed.packages())) install.packages('pacman')
 
 pacman::p_load(wbstats, IMFData, tidyverse, kableExtra)
@@ -179,7 +180,7 @@ summ_tradegdp <- tr_data %>%
 
 colnames(summ_tradegdp) <- c("País", "Media")
 
-kable(summ_tradegdp) %>%
+kable(summ_tradegdp, "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 ```
