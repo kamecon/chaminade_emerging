@@ -1,7 +1,7 @@
 ---
 title: "Economías Emergentes"
 author: "Kamal Romero"
-date: "Marzo 2019 (actualizado: `r Sys.Date()`)"
+date: "2019 (actualizado: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -81,7 +81,7 @@ new_cache <- wbcache()
 
 #GDP per capita (World Bank data)
 
-gdppc_data <- wb(indicator = 'NY.GDP.PCAP.CD', startdate = 1990, enddate = 2017)
+gdppc_data <- wb(indicator = 'NY.GDP.PCAP.CD', startdate = 1990, enddate = 2019)
 
 gdppc_data %>% dplyr::filter(country %in% c("European Union", "Latin America & Caribbean",  "Sub-Saharan Africa",  "South Asia", "North America")) %>% 
   ggplot(aes(x=date,y=value, group=country, colour=country))+
@@ -118,7 +118,7 @@ gdppc_data %>% dplyr::filter(country %in% c("European Union", "Latin America & C
 
 ```{r gini, warning=FALSE, message=FALSE, fig.align='center', fig.width=12}
 
-gini_data <- wb(indicator = 'SI.POV.GINI', startdate = 1990, enddate = 2017)
+gini_data <- wb(indicator = 'SI.POV.GINI', startdate = 1990, enddate = 2019)
 
 gini_data %>% dplyr::filter(country %in% c("Spain","Canada","Argentina","Thailand", "Rwanda")) %>%
   dplyr::filter(date>=2004) %>% 
@@ -173,7 +173,7 @@ Las economías emergentes tienden a ser más <span style="color:blue"> *abiertas
 
 ```{r tradeGdp, warning=FALSE, message=FALSE, fig.align='center', fig.width=12}
 
-tr_data <- wb(indicator = 'NE.TRD.GNFS.ZS', startdate = 1990, enddate = 2017)
+tr_data <- wb(indicator = 'NE.TRD.GNFS.ZS', startdate = 1990, enddate = 2019)
 
 tr_data %>% dplyr::filter(country %in% c("European Union",
                                          "North America",
@@ -293,7 +293,7 @@ Y la consecuencia de esto es ...
 #Definimos fechas y base de datos
 databaseID <- "PCTOT"
 startdate = "2001-01-01"
-enddate = "2017-12-31"
+enddate = "2019-12-31"
 checkquery = FALSE
 
 #Definimos frecuencia, paises e indicador
@@ -311,7 +311,7 @@ TOTquery_dc <- CompactDataMethod(databaseID, queryfilter_dc, startdate, enddate,
 list_dc <-  TOTquery_dc[2] %>%
   unlist() %>%
   as.vector() %>%
-  rep(each=17)
+  rep(each=19)
 
 #El query nos da una lista, uno de los elementos de la lista son los datos, donde cada pais es un subelemento de la lista.Tomamos el elemento de la lista con los datos, los juntamos todos con un rbind y lo convertimos en un tibble
 data_dc <- TOTquery_dc$Obs %>%
@@ -341,7 +341,7 @@ TOTquery_dev <- CompactDataMethod(databaseID, queryfilter_dev, startdate, enddat
 list_dev <-  TOTquery_dev[2] %>%
   unlist() %>%
   as.vector() %>%
-  rep(each=17)
+  rep(each=19)
 
 data_dev <- TOTquery_dev$Obs %>%
   bind_rows() %>%
@@ -373,7 +373,7 @@ data_TOT %>% ggplot(aes(x=Año,y=Valor, group=Pais, colour=Pais))+
   theme(axis.text.x  = element_text(angle=90))+
   theme(plot.title=element_text(face="bold",hjust=0.5,vjust=2,colour="#3C3C3C",size=18))+
   theme(legend.title=element_blank())+
-  scale_x_continuous(breaks = seq(2000,2017,1))+
+  scale_x_continuous(breaks = seq(2000,2019,1))+
   facet_wrap(~region)
 
 ```
@@ -398,7 +398,7 @@ data_TOT %>% ggplot(aes(x=Año,y=Valor, group=Pais, colour=Pais))+
 
 databaseID <- "FM"
 startdate = "2001-01-01"
-enddate = "2017-12-31"
+enddate = "2019-12-31"
 checkquery = FALSE
 
 
@@ -409,8 +409,8 @@ queryfilter_fisc <- list(CL_FREQ = "A",
 TOTquery_fisc <- CompactDataMethod(databaseID, queryfilter_fisc, startdate, enddate, 
                                   checkquery)
 
-regions <- TOTquery_fisc[2] %>% unlist() %>% as.vector() %>% rep(each=17)
-concepts <- TOTquery_fisc[3] %>% unlist() %>% as.vector() %>% rep(each=17)
+regions <- TOTquery_fisc[2] %>% unlist() %>% as.vector() %>% rep(each=19)
+concepts <- TOTquery_fisc[3] %>% unlist() %>% as.vector() %>% rep(each=19)
 
 data_fisc <- TOTquery_fisc$Obs %>%
   bind_rows() %>%
@@ -426,10 +426,10 @@ data_fisc$Region <- regions
 data_fisc$concepto <- concepts
 
 data_fisc$Regiones <-  c("Emerging Market and Middle-Income Economies","Major Advanced Economies - G7","Advanced Economies (IMF)","Emerging Market Latin America") %>%
-  rep(each=17, len=272)
+  rep(each=19, len=304)
 
 data_fisc$Conceptos <-  c("Expenditure","Gross debt","Balance","Revenue") %>%
-  rep(each=(17*4), len=272)
+  rep(each=(19*4), len=304)
 
 Tablas <- list()
 
@@ -446,7 +446,7 @@ Tablas_prov <- Tablas %>%
   bind_cols() %>%
   select(-matches("^C.*[0-9]$")) #Empieza por C y acaba en digito. No seleccionar
 
-colnames(Tablas_prov)[2:ncol(Tablas_prov)] <- c("Emerging Market and Middle-Income Economies","Major Advanced Economies - G7","Advanced Economies (IMF)","Emerging Market Latin America")
+colnames(Tablas_prov)[1:ncol(Tablas_prov)] <- c("Emerging Market and Middle-Income Economies","Major Advanced Economies - G7","Advanced Economies (IMF)","Emerging Market Latin America")
 
 kable(Tablas_prov) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
@@ -459,7 +459,7 @@ kable(Tablas_prov) %>%
 
 Otra característica peculiar de las economías emergentes es la emisión de deuda en moneda **distinta a la local**
 
-<center> <span style="color:blue"> *(Pecado original)* </span> </center>
+<center> <span style="color:blue"> **(Pecado original)** </span> </center>
 
 ---
 
@@ -469,7 +469,7 @@ Otra característica peculiar de las economías emergentes es la emisión de deu
 
 #Deuda % de exportaciones 
 
-db_data <- wb(indicator = 'DT.TDS.DECT.EX.ZS', startdate = 1990, enddate = 2017)
+db_data <- wb(indicator = 'DT.TDS.DECT.EX.ZS', startdate = 1990, enddate = 2019)
 
 db_data %>% dplyr::filter(country %in% c( "Latin America & Caribbean (excluding high income)",
                                           "Venezuela, RB" , "Brazil", "Bolivia")
