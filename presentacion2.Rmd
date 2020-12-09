@@ -1,7 +1,7 @@
 ---
 title: "Economías Emergentes"
 author: "Kamal Romero"
-date: "2019 (actualizado: `r Sys.Date()`)"
+date: "(actualizado: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -47,7 +47,7 @@ Gran parte de la inversión española en el exterior está en economías emergen
 
 Durante años las necesidades de financiación han sido cubiertas por el resto del mundo
 
-<img src="Dibujo.jpg" width="700">
+<img src="cap2.jpg" width="700">
 
 ---
 
@@ -55,7 +55,7 @@ Durante años las necesidades de financiación han sido cubiertas por el resto d
 
 Durante años las necesidades de financiación han sido cubiertas por el resto del mundo
 
-<img src="deuda.png" width="700">
+<img src="PIIN20.png" width="700">
 
 ---
 
@@ -217,7 +217,7 @@ summ_tradegdp <- tr_data %>%
 
 colnames(summ_tradegdp) <- c("País", "Media")
 
-kable(summ_tradegdp, "html") %>%
+kable(summ_tradegdp, "html", digits = c(0, 2)) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 ```
@@ -228,7 +228,7 @@ kable(summ_tradegdp, "html") %>%
 
 Las economías emergentes tienden a ser más <span style="color:blue"> *abiertas* </span>, es decir, el comercio internacional tiene un mayor peso en su economía.
 
-<center> <span style="color:red"> *FALSO* </span> </center>
+<center> <span style="color:red"> FALSO </span> </center>
 
 ---
 
@@ -446,9 +446,11 @@ Tablas_prov <- Tablas %>%
   bind_cols() %>%
   select(-matches("^C.*[0-9]$")) #Empieza por C y acaba en digito. No seleccionar
 
-colnames(Tablas_prov)[1:ncol(Tablas_prov)] <- c("Emerging Market and Middle-Income Economies","Major Advanced Economies - G7","Advanced Economies (IMF)","Emerging Market Latin America")
+colnames(Tablas_prov)[2:ncol(Tablas_prov)] <- c("Emerging Market and Middle-Income Economies","Major Advanced Economies - G7","Advanced Economies (IMF)","Emerging Market Latin America")
 
-kable(Tablas_prov) %>%
+#kable(Tablas_prov) %>%
+ # kable_styling(bootstrap_options = c("striped", "hover"))
+kable(Tablas_prov, align = "lcccc", digits = c(0, 2, 2, 2, 2)) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 ```
@@ -459,7 +461,7 @@ kable(Tablas_prov) %>%
 
 Otra característica peculiar de las economías emergentes es la emisión de deuda en moneda **distinta a la local**
 
-<center> <span style="color:blue"> **(Pecado original)** </span> </center>
+<center> <span style="color:blue"> (Pecado original)</span> </center>
 
 ---
 
@@ -516,11 +518,11 @@ El coste de financiación es mucho mayor
 
 databaseID <- "IFS"
 startdate = "2001-01-01"
-enddate = "2017-12-31"
+enddate = "2019-12-31"
 checkquery = FALSE
 
 queryfilter_int1 <- list(CL_FREQ = "A",
-                         CL_AREA_IFS = c("AU","GE","BR","US","NG","U2","TH"),
+                         CL_AREA_IFS = c("AU","GE","BR","US","NG","TH"),
                          CL_INDICATOR_IFS = c("FILR_PA"))
 
 TOTquery_int1 <- CompactDataMethod(databaseID, queryfilter_int1, startdate, enddate, 
@@ -529,7 +531,7 @@ TOTquery_int1 <- CompactDataMethod(databaseID, queryfilter_int1, startdate, endd
 list_int1 <-  TOTquery_int1[2] %>%
   unlist() %>%
   as.vector() %>%
-  rep(c(17,15,17,17,15,17))
+  rep(c(19,19,17,17,19,19))
 
 data_int1 <- TOTquery_int1$Obs %>%
   bind_rows() %>%
@@ -581,7 +583,7 @@ TOTquery_int2 <- CompactDataMethod(databaseID, queryfilter_int2, startdate, endd
 list_int2 <-  TOTquery_int2[2] %>%
   unlist() %>%
   as.vector() %>%
-  rep(c(17,10,17,17,17,17))
+  rep(c(12,19,19,19,17,19))
 
 data_int2 <- TOTquery_int2$Obs %>%
   bind_rows() %>%
@@ -608,7 +610,8 @@ data_int2 %>% dplyr::filter(Pais!="GE" & Pais!="AU") %>% ggplot(aes(x=Año,y=Val
   theme(axis.title.x=element_text(size=11,colour="#535353",face="bold",vjust=-.5))+
   theme(axis.text.x  = element_text(angle=90))+
   theme(plot.title=element_text(face="bold",hjust=0.5,vjust=2,colour="#3C3C3C",size=18))+
-  theme(legend.title=element_blank())
+  theme(legend.title=element_blank())+
+  scale_x_continuous(breaks = seq(2000,2019,1))
 
 
 ```
