@@ -31,7 +31,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Una fracción no trivial del comercio internacional español es con países emergentes
 
-<img src="CompSpa.jpg" width="800">
+<img src="CompSpa2.jpg" width="800">
 
 ---
 
@@ -248,7 +248,7 @@ Las economías emergentes tienden a concentrar sus exportaciones en **materias p
 
 En España (por ejemplo) el comercio no está concentrado en materias primas
 
-<img src="ExpSpain.jpg" width="500">
+<img src="ExpSpain2.jpg" width="500">
 
 ---
 
@@ -256,7 +256,7 @@ En España (por ejemplo) el comercio no está concentrado en materias primas
 
 En España (por ejemplo) el comercio no está concentrado en materias primas
 
-<img src="ImpSpain.jpg" width="450">
+<img src="ImpSpain2.jpg" width="450">
 
 ---
 
@@ -442,11 +442,17 @@ for (variable in c("Emerging Market and Middle-Income Economies","Major Advanced
 
 }
 
+# Tablas_prov <- Tablas %>%
+#   bind_cols() %>%
+#   select(-matches("^C.*[0-9]$")) #Empieza por C y acaba en digito. No seleccionar
+
 Tablas_prov <- Tablas %>%
   bind_cols() %>%
-  select(-matches("^C.*[0-9]$")) #Empieza por C y acaba en digito. No seleccionar
+  select(-matches("^C.*[2-9]$")) #Empieza por C y acaba en digito. No seleccionar
 
-colnames(Tablas_prov)[2:ncol(Tablas_prov)] <- c("Emerging Market and Middle-Income Economies","Major Advanced Economies - G7","Advanced Economies (IMF)","Emerging Market Latin America")
+#colnames(Tablas_prov)[2:ncol(Tablas_prov)] <- c("Emerging Market and Middle-Income Economies","Major Advanced Economies - G7","Advanced Economies (IMF)","Emerging Market Latin America")
+
+colnames(Tablas_prov) <- c("Conceptos","Emerging Market and Middle-Income Economies","Major Advanced Economies - G7","Advanced Economies (IMF)","Emerging Market Latin America")
 
 #kable(Tablas_prov) %>%
  # kable_styling(bootstrap_options = c("striped", "hover"))

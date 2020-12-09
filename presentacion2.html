@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
   <head>
     <title>Economías Emergentes</title>
     <meta charset="utf-8" />
@@ -7,6 +7,7 @@
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -36,7 +37,7 @@ class: center, middle, inverse, title-slide
 
 Una fracción no trivial del comercio internacional español es con países emergentes
 
-&lt;img src="CompSpa.jpg" width="800"&gt;
+&lt;img src="CompSpa2.jpg" width="800"&gt;
 
 ---
 
@@ -195,7 +196,7 @@ Las economías emergentes tienden a concentrar sus exportaciones en **materias p
 
 En España (por ejemplo) el comercio no está concentrado en materias primas
 
-&lt;img src="ExpSpain.jpg" width="500"&gt;
+&lt;img src="ExpSpain2.jpg" width="500"&gt;
 
 ---
 
@@ -203,7 +204,7 @@ En España (por ejemplo) el comercio no está concentrado en materias primas
 
 En España (por ejemplo) el comercio no está concentrado en materias primas
 
-&lt;img src="ImpSpain.jpg" width="450"&gt;
+&lt;img src="ImpSpain2.jpg" width="450"&gt;
 
 ---
 
@@ -435,6 +436,32 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
 // adds .remark-code-has-line-highlighted class to <pre> parent elements
 // of code chunks containing highlighted lines with class .remark-code-line-highlighted
 (function(d) {
@@ -452,17 +479,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
 
 <script>
 slideshow._releaseMath = function(el) {
